@@ -10,7 +10,6 @@ export async function getAllPokemon(url) {
     })
 }
 
-// a diferença dessa para a outra é que essa trata de apenas 1 poke
 export async function getPokemon(url) {
     return new Promise((resolve, reject) => {
         fetch(url)
