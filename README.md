@@ -11,7 +11,7 @@
         <li> <a href="#requisitos">Requisitos</a></li>
         <li> <a href="#comorodaroprojeto">Como Rodar o Projeto?</a> </li>
         <li> <a href="#resultados"> Resultados de Desenvolvimento</a> </li>
-        <li> <a href="#conteudoxterno">Conteúdo externo</a></li>
+        <li> <a href="#referencias">Referências</a></li>
 </ol>
 
 <h2 id="sobre">Sobre</h2> 
@@ -41,6 +41,11 @@ $ npm start
 
 <h2 id="resultados">Resultados de Desenvolvimento</h2> 
 
+<h3 align="center">
+    <img src="src/assets/home.gif" width="400"/>
+</h3>
+
+
 * Como a aplicação é de nível iniciante, ela é simples, mas está voltada para o uso de alguns conceitos base para o consumo de uma API em React. Como por exemplo, o uso de `useState` e `useEffect`.
 
 ``` javascript
@@ -56,8 +61,8 @@ $ npm start
 ``` javascript
     //exemplo do useEffect para o carregamento dos pokemons especificados
     useEffect(() => {
-    async function fetchData() {
-      let response = await getAllPokemon(initialUrl); //recebo a princípio todos os dados do endpoint principal (initialUrl)
+      async function fetchData() {
+        let response = await getAllPokemon(initialUrl); //recebo a princípio todos os dados do endpoint principal (initialUrl)
       console.log(response);
       setNextUrl(response.next); //reservo o próximo endpoint
       setPreviousUrl(response.previous); //reservo o anterior
@@ -71,3 +76,12 @@ $ npm start
 ```
 
 * `getAllPokemon(url)` e `getPokemon(url)` são as funções que estão presentes na camada de [serviço](https://github.com/eireneof/pokemon-api/blob/main/src/services/pokemon.js), ambas retornam uma `Promise`, mas a primeira está relacionada a um conjunto de pokemons, enquanto a outra retorna apenas um. 
+
+<h3 align="center">
+  <img src="src/assets/respons.gif" width="400"/>
+</h3>
+
+<h2 id="referencias">Referências</h2> 
+
+* A aplicação foi desenvolvida de acordo com o tutorial: [Build a React JS App with the Pokemon API](https://www.youtube.com/watch?v=HaEB0vdxpdg)
+* [Build A Pokémon Application With React - Tutorial](https://www.youtube.com/watch?v=o3ZUc7zH8BE)
