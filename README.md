@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+> **EM DESENVOLVIMENTO!** :woman_technologist:
+# Pokemon API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<h1 align="center">
+    <img src="src/assets/logo-pokemon.png" width="100"/>
+</h1>
 
-In the project directory, you can run:
+<ol>
+    <li><a href="#sobre">Sobre</a></li>
+        <li> <a href="#requisitos">Requisitos</a></li>
+        <li> <a href="#comorodaroprojeto">Como Rodar o Projeto?</a> </li>
+        <li> <a href="#resultados"> Resultados de Desenvolvimento</a> </li>
+        <li> <a href="#conteudoxterno">Conteúdo externo</a></li>
+</ol>
 
-### `npm start`
+<h2 id="sobre">Sobre</h2> 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+A ideia central desse projeto é a construção de um Front-end em React JS para o consumo de uma API. Para isso, foi escolhida a [PokéApi v2](https://pokeapi.co/docs/v2).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<h2 id="requisitos">Requisitos</h2> 
 
-### `npm test`
+Possuir o [Node Js](https://nodejs.org/en/) instalado em sua máquina.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<h2 id="comorodaroprojeto">Como Rodar o Projeto?</h2> 
 
-### `npm run build`
+``` bash
+#Clone este repositório
+$ git clone https://github.com/eireneof/pokemon-api.git
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#Abra a pasta pokemon-api e no terminal execute o comando:
+$ cd pokemon-api
+$ npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#Em seguida deixe a aplicação “rodando” através do comando abaixo:
+$ npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#A aplicação(frontend) será aberta na porta:3000 - acesse http://localhost:3000. 
 
-### `npm run eject`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<h2 id="resultados">Resultados de Desenvolvimento</h2> 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Como a aplicação é de nível iniciante, ela é simples, mas está voltada para o uso de alguns conceitos base para o consumo de uma API em React. Como por exemplo, o uso de `useState` e `useEffect`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+``` javascript
+  //exemplos do uso do useState para controlar a coleta de dados de cada pokemon, o próximo endpoint, o anteriaor e também o carregamento da página (respectivamente)
+  const [pokemonData, setPokemonData] = useState([]);
+  const [nextUrl, setNextUrl] = useState('');
+  const [previousUrl, setPreviousUrl] = useState('');
+  const [loading, setLoading] = useState(true);
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+``` javascript
+    //exemplo do useEffect para o carregamento dos pokemons especificados
+    useEffect(() => {
+    async function fetchData() {
+      let response = await getAllPokemon(initialUrl); //recebo a princípio todos os dados do endpoint principal (initialUrl)
+      console.log(response);
+      setNextUrl(response.next); //reservo o próximo endpoint
+      setPreviousUrl(response.previous); //reservo o anterior
+      let pokemon = await loadingPokemon(response.results); //crio um array com todos os pokemons disponibilizados por esse endpoint
+      console.log(pokemon);
+      setLoading(false); //mudo setLoandin() para falso, pois os dados já foram carregados
+    }
+    fetchData();
+  }, []);
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* `getAllPokemon(url)` e `getPokemon(url)` são as funções que estão presentes na camada de [serviço](https://github.com/eireneof/pokemon-api/blob/main/src/services/pokemon.js), ambas retornam uma `Promise`, mas a primeira está relacionada a um conjunto de pokemons, enquanto a outra retorna apenas um. 
